@@ -23,8 +23,8 @@ class WordDictionary {
         Node curr = root;
         for(int i = 0; i < word.length(); i++) {
             char ac = word.charAt(i);
-            if(curr.children[ac-'a'] == null) curr.children[ac-'a'] = new Node(ac);
-            curr = curr.children[ac-'a'];
+            if(curr.children[ac - 'a'] == null) curr.children[ac - 'a'] = new Node(ac);
+            curr = curr.children[ac - 'a'];
         }
         curr.isWord = true;
     }
