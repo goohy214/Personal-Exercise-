@@ -49,10 +49,8 @@ public class findMaximumXOR {
             if(curr.children[1 - bit] != null) {  
                 res += (1 << (30 - i));
                 curr = curr.children[1 - bit];
-            }else {
-                curr = curr.children[bit];
-            } 
-            
+            }else curr = curr.children[bit];
+             
         }
         
        return res; 
