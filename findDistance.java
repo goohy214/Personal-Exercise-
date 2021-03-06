@@ -27,7 +27,7 @@ class Solution {
         
         if(root.val == p || root.val == q) return Math.abs(Math.max(left, right) - depth);
         
-        if(left != 0 && right != 0) return left + right;
+        if(left != 0 && right != 0) return left + right - 2 * depth;
         
         return Math.abs(left - right);
     }
