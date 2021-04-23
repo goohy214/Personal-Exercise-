@@ -38,4 +38,20 @@ Segment Tree 的构建是一个递归的过程. 第一步将数组一分为二�
 
 ![](https://raw.githubusercontent.com/goohy214/Personal-Exercise-/main/SegmentTree/img4.png)
 
+树的每一个节点都代表一个中间值，比如根节点处的值代表从 index 0 到 index 5 的最小值, 是 -1.
+
+index 0 到 index 2 的最小值是 -1； index 3 到 index 5 的最小值是 0； 依此类推 ...
+
+
 ![](https://raw.githubusercontent.com/goohy214/Personal-Exercise-/main/SegmentTree/img5.png)
+
+
+#### 范围查找
+
+进行范围查找时，需要考虑三种情况. 第一种部分重合, 到该节点的左右子树查找；第二种完全重合，则返回当前节点的值；第三种没有重合，则返回 Integer.MAX_VALUE. 
+
+例如现在需要进行对区间 [2,4] 的查找. 从根节点开始，[2,4] 没有完全覆盖 [0,5]，所以属于部分重合，接着到左右子树查找.
+
+[2,4] 部分覆盖 [0,2]，继续到左右子树查找.
+
+[2,4] 完全不和 [0,1] 重合，所以返回 Integer.MAX_VALUE. 
