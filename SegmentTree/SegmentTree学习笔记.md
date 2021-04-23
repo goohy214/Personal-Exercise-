@@ -55,3 +55,64 @@ index 0 到 index 2 的最小值是 -1； index 3 到 index 5 的最小值是 0�
 [2,4] 部分覆盖 [0,2]，继续到左右子树查找.
 
 [2,4] 完全不和 [0,1] 重合，所以返回 Integer.MAX_VALUE. 
+
+[2,4] 完全覆盖 [2,2], 所以返回 [2,2] 所在节点的值 4 .
+
+依此类推 ...
+
+![](https://raw.githubusercontent.com/goohy214/Personal-Exercise-/main/SegmentTree/img6.png)
+
+####二叉树实现 Segment Tree
+
+```
+public class Main {
+    public SegmentTreeNode root;
+    
+    public NumArray(int[] nums) {
+        root = buildSegmentTree(nums, 0, nums.length - 1);
+    }
+    
+    private SegmentTreeNode buildSegmentTree(int[] nums, int start, int end) {
+        if (start > end) return null;
+        else {
+            SegmentTreeNode root = new SegmentTreeNode(start, end);
+            if (start == end) root.val = nums[start];
+            else {
+                int mid = (start + end) / 2;
+                root.left = buildSegmentTree(nums, start, mid);
+                root.right = buildSegmentTree(nums, mid + 1, end);
+                root.val = Math.min(root.left.val, root.right.val);
+            }
+            return root;
+        }
+    }
+    
+    public int minRange(int start, int end) {
+        return minRange(root, start, end);
+    }
+    
+    private int minRange(SegmentTreeNode root, int start, int end) {
+        if (start <= root.start && end >= root.end) return root.val;
+        else if (start > root.end || end < root.start) return Integer.MAX_VALUE;
+        else {
+            int left = minRange(root.left, start, end);
+            int right = minRange(root.right, start, end);
+            return Math.min(left, right);
+        }
+    }
+
+    private class SegmentTreeNode {
+        int start, end;
+        SegmentTreeNode left, right;
+        int val;
+        
+        private segmentTreeNode(int start, int end) {
+            this.start = start;
+            this.end = end;
+            left = null;
+            right = null;
+            val = 0;
+        }
+    }
+}
+```
