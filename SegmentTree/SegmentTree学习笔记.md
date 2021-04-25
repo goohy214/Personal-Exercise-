@@ -62,9 +62,9 @@ index 0 到 index 2 的最小值是 -1； index 3 到 index 5 的最小值是 0�
 
 ![](https://raw.githubusercontent.com/goohy214/Personal-Exercise-/main/SegmentTree/img6.png)
 
-####二叉树实现 Segment Tree
+#### 二叉树实现 Segment Tree
 
-```
+```sh
 public class Main {
     public SegmentTreeNode root;
     
@@ -116,3 +116,23 @@ public class Main {
     }
 }
 ```
+
+#### 数组实现 Segment Tree
+
+首先记住一个 rule
+
+假设输入数组的长度为 n
+
+若 n 是 2 的幂， 所需数组的长度为 2 * n - 1
+
+若 n 不是 2 的幂， 所需数组的长度为 next (pow of 2 for len) * 2 - 1
+
+> check [this](https://www.geeksforgeeks.org/smallest-power-of-2-greater-than-or-equal-to-n/) for next power of 2 
+
+二叉树是可以用数组来表示的，例如在大小堆的实现中，就用了数组来表示树. 
+
+第 i 个数代表的节点的左子树是 2 * i + 1, 右子树是 2 * i + 2， 父节点是 (i - 1) / 2
+
+worest case 所需数组的长度是 4n，所以空间复杂度是 O(n), 时间复杂度是 O(n)
+
+![](https://raw.githubusercontent.com/goohy214/Personal-Exercise-/main/SegmentTree/img7.png)
