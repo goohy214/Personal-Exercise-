@@ -136,3 +136,28 @@ public class Main {
 worest case 所需数组的长度是 4n，所以空间复杂度是 O(n), 时间复杂度是 O(n)
 
 ![](https://raw.githubusercontent.com/goohy214/Personal-Exercise-/main/SegmentTree/img7.png)
+
+```sh
+    private void constructMinSegmentTree(int[] segmentTree, int[] input, int low, int high, int pos) {
+        if (low == high) {
+            segmentTree[pos] = input[low];
+            return;
+        }
+        int mid = (low + high) / 2;
+        constructMinSegmentTree(segmentTree, input, low, mid, 2 * pos + 1);
+        constructMinSegmentTree(segmentTree, input, mid + 1, high, 2 * pos + 2);
+        segmentTree[pos] = Math.min(segmentTree[2 * pos + 1], segmentTree[2 * pos + 2]);
+    }
+    
+    private int rangeMinQuery(int[] segmentTree, int[] input, int low, int high, int qlow, int qhigh, int pos) {
+        if (qlow <= low && qhigh >= high)
+            return segmentTree[pos];
+        else if (qlow > high || qhigh < low)
+            return Integer.MAX_VALUE;
+        else {
+            int mid = (low + high) / 2;
+            return Math.min(rangeMinQuery(segmentTree, input, low, mid, qlow, qhigh, 2 * pos + 1), 
+            rangeMinQuery(segmentTreem input, mid + 1, high, qlow, qhigh, 2 * pos + 2));
+        }
+    }
+```
